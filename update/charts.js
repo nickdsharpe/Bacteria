@@ -28,7 +28,8 @@ function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
   buildMetadata(newSample);
   buildCharts(newSample);
-  };
+  
+}
 
 // Demographics Panel 
 function buildMetadata(sample) {
@@ -78,22 +79,21 @@ function buildCharts(sample) {
     var otuIds = chosenSample[0].otu_ids;
     var otuLabels = chosenSample[0].otu_labels;
     var sample_values = chosenSample[0].sample_values;
-    console.log(otuLabels);
+    console.log(otuIds);
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
 
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
-    var yticks = otuIds.slice(0, 10).reverse().map(ID => `OTU ${ID}`);
+    var yticks = otuIds.sort((a, b) => b - a).reverse().slice(0, 10);
     console.log();
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = {
 
-      x: sample_values.slice(0, 10).reverse(),
+      x: sample_values,
       y: yticks,
-      text: otuLabels.slice(0, 10).reverse(),
       type: 'bar',
       orientation: 'h'
 
